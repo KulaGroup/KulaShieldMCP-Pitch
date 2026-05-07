@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KulaShield MCP Pitch Deck</title>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: Inter, Arial, sans-serif;
+      background: #070b15;
+      color: #f5f7fb;
+      overflow-x: hidden;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      z-index: 20;
+      width: 100%;
+      padding: 18px 46px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(7,11,21,0.88);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: white;
+      text-decoration: none;
+      font-size: 23px;
+      font-weight: 900;
+    }
+
+    .brand img {
+      width: 46px;
+      height: 46px;
+      object-fit: cover;
+      border-radius: 50%;
+      box-shadow: 0 0 28px rgba(212,175,55,0.55);
+    }
+
+    nav {
+      display: flex;
+      gap: 22px;
+    }
+
+    nav a {
+      color: #d8dce8;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 13px 22px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #ffffff, #d4af37);
+      color: #05070d;
+      text-decoration: none;
+      font-weight: 900;
+      box-shadow: 0 0 30px rgba(212,175,55,0.32);
+    }
+
+    .btn-dark {
+      background: rgba(255,255,255,0.08);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.16);
+      box-shadow: none;
+    }
+
+    section {
+      min-height: 100vh;
+      padding: 130px 8% 90px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-bottom: 1px solid rgba(255,255,255,0.09);
+      position: relative;
+    }
+
+    .hero {
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .orb {
+      position: absolute;
+      left: 50%;
+      top: 52%;
+      width: 680px;
+      height: 680px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background:
+        radial-gradient(circle, rgba(0,224,255,0.27), transparent 45%),
+        radial-gradient(circle at 70% 30%, rgba(212,175,55,0.34), transparent 40%),
+        radial-gradient(circle at 30% 80%, rgba(126,62,255,0.30), transparent 42%);
+      filter: blur(8px);
+      z-index: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1050px;
+      margin: 0 auto;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 12px 20px;
+      margin-bottom: 34px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #f5df8a;
+      font-weight: 900;
+    }
+
+    h1 {
+      font-size: clamp(48px, 8vw, 96px);
+      line-height: 0.98;
+      letter-spacing: -3px;
+      margin-bottom: 28px;
+    }
+
+    h2 {
+      font-size: clamp(38px, 5vw, 68px);
+      line-height: 1;
+      letter-spacing: -2px;
+      margin-bottom: 28px;
+    }
+
+    h3 {
+      font-size: 24px;
+      margin-bottom: 14px;
+      color: #f6d76b;
+    }
+
+    .gradient {
+      background: linear-gradient(135deg, #ffffff, #d4af37, #00e0ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .lead {
+      max-width: 880px;
+      margin: 0 auto 34px;
+      color: #c7cfdf;
+      font-size: 23px;
+      line-height: 1.45;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 34px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin-top: 34px;
+    }
+
+    .card {
+      padding: 30px;
+      border-radius: 28px;
+      background: rgba(255,255,255,0.055);
+      border: 1px solid rgba(255,255,255,0.11);
+      box-shadow: 0 24px 80px rgba(0,0,0,0.24);
+    }
+
+    .card p, .card li {
+      color: #c7cfdf;
+      font-size: 17px;
+      line-height: 1.6;
+    }
+
+    ul { padding-left: 20px; }
+
+    .diagram {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 18px;
+      margin-top: 36px;
+    }
+
+    .step {
+      padding: 24px;
+      min-height: 160px;
+      border-radius: 24px;
+      text-align: center;
+      background: linear-gradient(180deg, rgba(255,255,255,0.085), rgba(255,255,255,0.035));
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .step strong {
+      display: block;
+      color: #f6d76b;
+      margin-bottom: 12px;
+      font-size: 18px;
+    }
+
+    .metric {
+      text-align: center;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 46px;
+      color: #f6d76b;
+      margin-bottom: 8px;
+    }
+
+    .mockup {
+      padding: 26px;
+      border-radius: 32px;
+      background: #050914;
+      border: 1px solid rgba(255,255,255,0.14);
+      box-shadow: 0 34px 100px rgba(0,0,0,0.5);
+      margin-top: 34px;
+    }
+
+    .mockup-top {
+      display: flex;
+      justify-content: space-between;
+      color: #b9c0ce;
+      margin-bottom: 20px;
+      font-weight: 800;
+    }
+
+    .alert {
+      padding: 16px;
+      margin-top: 12px;
+      border-radius: 16px;
+      background: rgba(212,175,55,0.12);
+      border: 1px solid rgba(212,175,55,0.34);
+      color: #f4e6ad;
+      line-height: 1.55;
+    }
+
+    .founder {
+      display: grid;
+      grid-template-columns: 0.7fr 1.3fr;
+      gap: 36px;
+      align-items: center;
+    }
+
+    .founder img {
+      width: 260px;
+      max-width: 100%;
+      border-radius: 28px;
+      box-shadow: 0 0 55px rgba(212,175,55,0.34);
+    }
+
+    .center { text-align: center; }
+
+    footer {
+      padding: 36px 8%;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      color: #9aa3b8;
+      border-top: 1px solid rgba(255,255,255,0.12);
+    }
+
+    @media (max-width: 1050px) {
+      nav { display: none; }
+      .grid, .grid-2, .diagram, .founder { grid-template-columns: 1fr; }
+      section { padding-top: 120px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <a href="#top" class="brand">
+    <img src="Logo.jpg" alt="KulaShield MCP logo">
+    KulaShield MCP
+  </a>
+
+  <nav>
+    <a href="#problem">Problem</a>
+    <a href="#solution">Solution</a>
+    <a href="#product">Product</a>
+    <a href="#demo">Demo</a>
+    <a href="#market">Market</a>
+    <a href="#founder">Founder</a>
+    <a href="#ask">Ask</a>
+  </nav>
+
+  <a class="btn" href="https://kulagroup.github.io/KulaShieldMCP/" target="_blank">
+    Open MVP
+  </a>
+</header>
+
+<main id="top">
+
+<section class="hero">
+  <div class="orb"></div>
+
+  <div class="hero-content">
+    <div class="badge">AI Agent Security · Shadow AI Discovery · MCP Governance</div>
+
+    <h1>
+      KulaShield MCP<br>
+      <span class="gradient">AI Agent Threat Detection</span>
+    </h1>
+
+    <p class="lead">
+      A security and governance platform for detecting Shadow AI, rogue MCP servers,
+      suspicious permission chains and potential data exfiltration in enterprise AI environments.
+    </p>
+
+    <a class="btn" href="https://kulagroup.github.io/KulaShieldMCP/" target="_blank">View Live MVP</a>
+    <a class="btn btn-dark" href="#problem">Start Pitch</a>
+  </div>
+</section>
+
+<section id="problem">
+  <h2>The Problem</h2>
+  <p class="lead">
+    Enterprises are adopting AI agents faster than security teams can govern them.
+    Hidden AI tools, unmanaged MCP servers and connected SaaS permissions create a new attack surface.
+  </p>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Shadow AI</h3>
+      <p>Employees and teams use unmanaged AI tools without formal security review or governance visibility.</p>
+    </div>
+
+    <div class="card">
+      <h3>Rogue MCP Servers</h3>
+      <p>MCP endpoints may expose powerful tools, documents, mailboxes or internal systems to autonomous agents.</p>
+    </div>
+
+    <div class="card">
+      <h3>Data Exposure</h3>
+      <p>AI agents can create indirect data paths that traditional security tools may not clearly understand.</p>
+    </div>
+  </div>
+</section>
+
+<section id="solution">
+  <h2>The Solution</h2>
+  <p class="lead">
+    KulaShield MCP gives security teams visibility, detection and governance over AI agents,
+    MCP servers, tool access and risky automation behavior.
+  </p>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Discover</h3>
+      <p>Identify hidden AI tools, active agents, MCP endpoints and connected enterprise services.</p>
+    </div>
+
+    <div class="card">
+      <h3>Analyze</h3>
+      <p>Map permission chains and detect abnormal agent behavior, tool usage and data access patterns.</p>
+    </div>
+
+    <div class="card">
+      <h3>Alert</h3>
+      <p>Generate executive-ready security alerts for rogue MCP servers and potential data exfiltration.</p>
+    </div>
+  </div>
+</section>
+
+<section id="product">
+  <h2>How It Works</h2>
+  <p class="lead">
+    KulaShield MCP is designed as a visibility and detection layer for enterprise AI agent environments.
+  </p>
+
+  <div class="diagram">
+    <div class="step"><strong>1. Scan</strong>MCP endpoints, AI tools, browser usage and connected services.</div>
+    <div class="step"><strong>2. Ingest</strong>Logs, telemetry, identity signals and tool activity.</div>
+    <div class="step"><strong>3. Map</strong>Agent-to-tool-to-data permission chains.</div>
+    <div class="step"><strong>4. Detect</strong>Rogue servers, abnormal behavior and risky access paths.</div>
+    <div class="step"><strong>5. Report</strong>Security alerts, remediation guidance and governance summaries.</div>
+  </div>
+
+  <div class="mockup">
+    <div class="mockup-top">
+      <span>KulaShield MCP Dashboard Mockup</span>
+      <span>Status: Monitoring</span>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>Live Detection Feed</h3>
+        <div class="alert">Critical: Rogue MCP server connected to Gmail + Notion workspace.</div>
+        <div class="alert">High: AI agent accessed internal documents and export tool in one permission chain.</div>
+        <div class="alert">Medium: Abnormal high-volume document access detected outside normal usage pattern.</div>
+      </div>
+
+      <div class="card">
+        <h3>Risk Summary</h3>
+        <p>Critical alerts: 2</p>
+        <p>High risk findings: 6</p>
+        <p>Medium risk findings: 14</p>
+        <p>False positive rate: to be validated during pilot phase</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="demo">
+  <h2>Demo / MVP</h2>
+  <p class="lead">
+    Current MVP demonstrates the product narrative, dashboard concept, detection logic,
+    enterprise positioning and initial user journey.
+  </p>
+
+  <div class="center">
+    <a class="btn" href="https://kulagroup.github.io/KulaShieldMCP/" target="_blank">
+      Open Live KulaShield MCP MVP
+    </a>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Demo Scenario</h3>
+      <p>Unknown MCP server connects to Gmail, Notion and internal document workflows.</p>
+    </div>
+
+    <div class="card">
+      <h3>Detected Risk</h3>
+      <p>Suspicious permission chain and potential data export path are identified.</p>
+    </div>
+
+    <div class="card">
+      <h3>Security Output</h3>
+      <p>Alert, risk summary and remediation guidance are presented to the security team.</p>
+    </div>
+  </div>
+</section>
+
+<section id="market">
+  <h2>Market Timing</h2>
+  <p class="lead">
+    AI agents and MCP-based integrations are moving into enterprise workflows.
+    Security teams need visibility before agentic automation becomes unmanaged infrastructure.
+  </p>
+
+  <div class="grid">
+    <div class="card metric">
+      <strong>AI</strong>
+      Agent adoption is accelerating.
+    </div>
+
+    <div class="card metric">
+      <strong>MCP</strong>
+      Tool connectivity expands the attack surface.
+    </div>
+
+    <div class="card metric">
+      <strong>Governance</strong>
+      Regulated organizations need control and auditability.
+    </div>
+  </div>
+</section>
+
+<section id="traction">
+  <h2>Validation Plan</h2>
+  <p class="lead">
+    The next milestone is a focused proof of concept with pilot users and measurable detection outcomes.
+  </p>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Target Pilots</h3>
+      <p>Security teams in regulated, enterprise and critical infrastructure environments.</p>
+    </div>
+
+    <div class="card">
+      <h3>Metrics</h3>
+      <ul>
+        <li>Detected MCP endpoints</li>
+        <li>Detected risky permission chains</li>
+        <li>False positive rate</li>
+        <li>Time to investigation</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Next Proof</h3>
+      <p>2-3 minute demo video, private test environment and pilot-ready dashboard.</p>
+    </div>
+  </div>
+</section>
+
+<section id="founder">
+  <h2>Founder</h2>
+
+  <div class="founder">
+    <div class="center">
+      <img src="Logo.jpg" alt="KulaShield founder logo">
+    </div>
+
+    <div class="card">
+      <h3>Krystian Kula</h3>
+      <p>
+        Founder of KulaShield MCP with operational background in physical security,
+        cybersecurity operations, crisis response and critical infrastructure protection.
+      </p>
+      <br>
+      <p>
+        Former Police Criminal Division officer and Regional Security Manager within Google security operations across Poland.
+      </p>
+      <br>
+      <p>
+        Currently Head of Operations at TomFit AG, focused on AI/LLM implementation,
+        risk management and secure enterprise automation.
+      </p>
+      <br>
+      <p>
+        Security-cleared professional with experience in high-security government
+        and international operational environments.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="business">
+  <h2>Business Model</h2>
+  <p class="lead">
+    Enterprise SaaS / security platform model for organizations deploying AI agents and LLM-based automation.
+  </p>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Enterprise</h3>
+      <p>Custom deployment, pilot evaluation, dashboard access and security review.</p>
+    </div>
+
+    <div class="card">
+      <h3>Pricing</h3>
+      <p>Contact us / enterprise pricing based on environment size, integrations and monitoring scope.</p>
+    </div>
+
+    <div class="card">
+      <h3>Expansion</h3>
+      <p>From Shadow AI discovery to continuous agent governance and incident detection.</p>
+    </div>
+  </div>
+</section>
+
+<section id="ask">
+  <h2>Current Ask</h2>
+  <p class="lead">
+    KulaShield MCP is seeking feedback, pilot conversations and introductions to security leaders,
+    AI governance teams and early-stage investors.
+  </p>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3>What We Need</h3>
+      <ul>
+        <li>Pilot users</li>
+        <li>Security design partners</li>
+        <li>Feedback from CISOs and AI governance teams</li>
+        <li>Investor and accelerator introductions</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Contact</h3>
+      <p>Email: krystiankula@gmail.com</p>
+      <br>
+      <a class="btn" href="mailto:krystiankula@gmail.com?subject=KulaShield%20MCP%20Pitch">
+        Contact Founder
+      </a>
+      <a class="btn btn-dark" href="https://kulagroup.github.io/KulaShieldMCP/" target="_blank">
+        View MVP
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <span>© 2026 KulaShield MCP</span>
+  <span>Pitch Deck · AI Agent Security · Shadow AI Discovery · MCP Governance</span>
+</footer>
+
+</body>
+</html>
